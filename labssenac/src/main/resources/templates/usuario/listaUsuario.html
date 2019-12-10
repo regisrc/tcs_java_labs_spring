@@ -4,13 +4,16 @@
 <head>
 </head>
 <body>
-	<div th:each="professor : ${professores}">
+	<div th:each="usuario : ${usuarios}">
 		<div class="row">
 			<p>
-				<a><span th:text="${professor.nome}"></span></a>
+				<a><span th:text="${usuario.login}"></span></a>
 			</p>
 			<p>
-				<span th:text="${professor.ativo}"></span>
+				<span th:text="${usuario.ativo}"></span>
+			</p>
+			<p>
+				<span th:text="${usuario.professor.id}"></span>
 			</p>
 		</div>
 	</div>
