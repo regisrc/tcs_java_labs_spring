@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-<title>ProfessorApp</title>
+<title>MateriaApp</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -11,21 +11,39 @@
 </head>
 
 <body>
+
 	<div class="container text-center mt-5">
-		<h1>Pagina de cadastro de Professores</h1>
-		<form method="post">
-			<div class="md">
-				<input class="w-50 m-2" type="text" value="" name="nome"
-					placeholder="Nome" /><input class="w-50 m-2" type="text" value=""
-					name="ativo" placeholder="Ativo" />
-			</div>
-			<div class="md mt-3">
-				<button class="btn btn-primary" type="submit">Salvar</button>
-				<a class="m-3" href="/professor/listar">Voltar</a>
-			</div>
-		</form>
+		<div class="md">
+			<h1>Lista de Materias</h1>
+			<a href="/reserva/cadastrar"><button class="btn btn-primary m-3"
+					type="submit">Cadastrar</button></a> <a href="../"><button
+					class="btn btn-primary m-3" type="submit">Voltar</button></a>
+		</div>
+
+		<table class="table table-dark table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Sala</th>
+					<th scope="col">Materia</th>
+					<th scope="col">Professor</th>
+					<th scope="col">Data</th>
+					<th scope="col">Data Limite</th>
+				</tr>
+			</thead>
+			<tbody th:each="reserva : ${reservas}">
+				<th th:text="${reserva.id}"></th>
+				<td th:text="${reserva.sala}"></td>
+				<th th:text="${reserva.data}"></th>
+				<td th:text="${reserva.dataLimite}"></td>
+				<th th:text="${reserva.professor}"></th>
+				<td th:text="${reserva.materia}"></td>
+			</tbody>
+		</table>
+
 
 	</div>
+
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>

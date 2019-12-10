@@ -24,7 +24,6 @@ public class SalaController {
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String form(Sala sala) {
-
 		salaRepository.save(sala);
 
 		return "redirect:/sala/cadastrar";

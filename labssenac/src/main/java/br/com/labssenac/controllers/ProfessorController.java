@@ -33,6 +33,7 @@ public class ProfessorController {
 	public ModelAndView listaProfessores() {
 		ModelAndView modelAndView = new ModelAndView("professor/listaProfessor");
 		Iterable<Professor> professores = professorRepository.findAll();
+		
 		modelAndView.addObject("professores", professores);
 		return modelAndView;
 	}

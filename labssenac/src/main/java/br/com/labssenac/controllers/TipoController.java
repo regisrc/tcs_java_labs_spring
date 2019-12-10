@@ -26,7 +26,7 @@ public class TipoController {
 	public String form(Tipo tipo) {
 		tipoRepository.save(tipo);
 
-		return "redirect:/tipo/formTipo";
+		return "redirect:/tipo/cadastrar";
 	}
 
 	@RequestMapping("/listar")

@@ -34,7 +34,7 @@ public class UsuarioController {
 
 	@RequestMapping("/listar")
 	public ModelAndView listaUsuarios() {
-		ModelAndView modelAndView = new ModelAndView("usuario/listarUsuario");
+		ModelAndView modelAndView = new ModelAndView("usuario/listaUsuario");
 		Iterable<Usuario> usuarios = usuarioRepository.findAll();
 		modelAndView.addObject("usuarios", usuarios);
 		return modelAndView;
