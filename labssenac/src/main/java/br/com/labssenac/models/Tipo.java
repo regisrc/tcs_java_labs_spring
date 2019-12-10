@@ -14,7 +14,7 @@ public class Tipo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String tipo;
+	private String nomeTipo;
 	private boolean ativo;
 	
 	public long getId() {
@@ -25,12 +25,14 @@ public class Tipo implements Serializable {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+
+
+	public String getNomeTipo() {
+		return nomeTipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setNomeTipo(String nomeTipo) {
+		this.nomeTipo = nomeTipo;
 	}
 
 	public boolean isAtivo() {

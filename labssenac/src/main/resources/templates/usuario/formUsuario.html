@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
 <title>ProfessorApp</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous" />
 </head>
 
 <body>
-	<h1>Pagina de cadastro de Usuario:</h1>
-	<form method="post">
-		Login:<input type="text" value="" name="login" /> Senha:<input
-			type="text" value="" name="senha" /> Id_prof:<input type="text"
-			value="" name="professor.id" /> Ativo:<input type="text" value="true"
-			name="ativo" />
-		<button type="submit">Salvar</button>
-	</form>
+
+	<div class="container text-center mt-5">
+		<h1>Pagina de cadastro de Usuario</h1>
+		<form method="post">
+			<div class="md">
+				<input class="w-50 m-2" type="text" value="" name="login"
+					placeholder="Login" /><input class="w-50 m-2" type="text" value=""
+					name="senha" placeholder="Senha" />
+			</div>
+
+			<div class="md">
+				<input class="w-50 m-2" type="text" value="" name="professor.id"
+					placeholder="Professor ID" /><input class="w-50 m-2" type="text"
+					value="" name="ativo" placeholder="Ativo" />
+			</div>
+			<div class="md mt-3">
+				<button class="btn btn-primary" type="submit">Salvar</button>
+				<a class="m-3" href="/usuario/listar">Voltar</a>
+			</div>
+		</form>
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
 </body>
+
 </html>

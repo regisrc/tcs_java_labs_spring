@@ -2,10 +2,10 @@ package br.com.labssenac.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import br.com.labssenac.models.Tipo;
+import br.com.labssenac.models.Reserva;
 
-public interface ReservaRepository extends CrudRepository<Tipo, String> {
+public interface ReservaRepository extends CrudRepository<Reserva, String> {
 	
-	Tipo findById(long id);
+	Reserva findById(long id);
 	
 }

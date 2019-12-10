@@ -11,21 +11,31 @@
 </head>
 
 <body>
+
 	<div class="container text-center mt-5">
-		<h1>Pagina de cadastro de Professores</h1>
-		<form method="post">
-			<div class="md">
-				<input class="w-50 m-2" type="text" value="" name="nome"
-					placeholder="Nome" /><input class="w-50 m-2" type="text" value=""
-					name="ativo" placeholder="Ativo" />
-			</div>
-			<div class="md mt-3">
-				<button class="btn btn-primary" type="submit">Salvar</button>
-				<a class="m-3" href="/professor/listar">Voltar</a>
-			</div>
-		</form>
+		<div class="md">
+			<h1>Lista de Tipos</h1>
+			<a href="/tipo/cadastrar"><button
+					class="btn btn-primary m-3" type="submit">Cadastrar</button></a> <a
+				href="../"><button class="btn btn-primary m-3" type="submit">Voltar</button></a>
+		</div>
+
+		<table class="table table-dark table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Tipo</th>
+				</tr>
+			</thead>
+			<tbody th:each="tipo : ${tipos}">
+				<th th:text="${tipo.id}"></th>
+				<td th:text="${tipo.nomeTipo}"></td>
+			</tbody>
+		</table>
+
 
 	</div>
+
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>
