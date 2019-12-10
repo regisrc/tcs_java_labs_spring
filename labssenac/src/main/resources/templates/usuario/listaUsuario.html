@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+</head>
+<body>
+	<div th:each="usuario : ${usuarios}">
+		<div class="row">
+			<p>
+				<a><span th:text="${usuario.login}"></span></a>
+			</p>
+			<p>
+				<span th:text="${usuario.ativo}"></span>
+			</p>
+			<p>
+				<span th:text="${usuario.professor.id}"></span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

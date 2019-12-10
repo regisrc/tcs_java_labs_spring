@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+</head>
+<body>
+	<div th:each="professor : ${professores}">
+		<div class="row">
+			<p>
+				<a><span th:text="${professor.nome}"></span></a>
+			</p>
+			<p>
+				<span th:text="${professor.ativo}"></span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

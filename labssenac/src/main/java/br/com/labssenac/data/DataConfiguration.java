@@ -1,4 +1,4 @@
-package br.com.labssenac;
+package br.com.labssenac.data;
 
 
 import javax.sql.DataSource;
@@ -32,6 +32,5 @@ public class DataConfiguration {
 		adapter.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
 		adapter.setPrepareConnection(true);
 		return adapter;
-	}
-
+	}	
 }
