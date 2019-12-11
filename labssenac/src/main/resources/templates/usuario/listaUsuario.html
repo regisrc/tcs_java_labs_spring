@@ -15,24 +15,29 @@
 	<div class="container text-center mt-5">
 		<div class="md">
 			<h1>Lista de Usuarios</h1>
-			<a href="/usuario/cadastrar"><button class="btn btn-primary m-3" type="submit">Cadastrar</button></a>
-		<a href="../"><button class="btn btn-primary m-3" type="submit">Voltar</button></a>
-	</div>
+			<a href="/usuario/cadastrar"><button class="btn btn-primary m-3"
+					type="submit">Cadastrar</button></a> <a href="../"><button
+					class="btn btn-primary m-3" type="submit">Voltar</button></a>
+		</div>
 
-	<table class="table table-dark table-bordered">
-		<thead>
-			<tr>
-				<th scope="col">Id</th>
-				<th scope="col">Login</th>
-				<th scope="col">Senha</th>
-			</tr>
-		</thead>
-		<tbody th:each="usuario : ${usuarios}">
-			<th th:text="${usuario.id}"></th>
-			<th th:text="${usuario.login}"></th>
-			<td th:text="${usuario.senha}"></td>
-		</tbody>
-	</table>
+		<table class="table table-dark table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Login</th>
+					<th scope="col">Senha</th>
+					<th scope="col">Deletar</th>
+					<th scope="col">Atualizar</th>
+				</tr>
+			</thead>
+			<tbody th:each="usuario : ${usuarios}">
+				<th th:text="${usuario.id}"></th>
+				<th th:text="${usuario.login}"></th>
+				<th th:text="${usuario.senha}"></th>
+				<td><a th:href="@{'/usuario/deletar/' + ${usuario.id}}">Deletar</a></td>
+				<td><a th:href="@{'/usuario/atualizar/' + ${usuario.id}}">Atualizar</a></td>
+			</tbody>
+		</table>
 
 
 

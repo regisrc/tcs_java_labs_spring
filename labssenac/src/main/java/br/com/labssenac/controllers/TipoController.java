@@ -1,5 +1,8 @@
 package br.com.labssenac.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,21 +31,44 @@ public class TipoController {
 
 		return "redirect:/tipo/cadastrar";
 	}
-
+	
 	@RequestMapping("/listar")
 	public ModelAndView listaTipos() {
 		ModelAndView modelAndView = new ModelAndView("tipo/listaTipo");
-		Iterable<Tipo> tipos = tipoRepository.findAll();
-		modelAndView.addObject("tipos", tipos);
+		List<Tipo> tipos = (List<Tipo>) tipoRepository.findAll();
+		List<Tipo> tiposAtivas = new ArrayList<Tipo>();
+
+		for (Tipo tipo : tipos) {
+			if (tipo.isAtivo())
+				tiposAtivas.add(tipo);
+		}
+
+		modelAndView.addObject("tipos", tiposAtivas);
 		return modelAndView;
 	}
 
-	@RequestMapping("/detalhes/{id}")
-	public ModelAndView detalheTipos(@PathVariable("id") long id) {
-		Tipo tipo = tipoRepository.findById(id);
-		ModelAndView modelAndView = new ModelAndView("tipo/detalhesTipo");
-		modelAndView.addObject("tipo", tipo);
-		return modelAndView;
+	@RequestMapping("/deletar/{id}")
+	public String deletar(@PathVariable("id") long id) {
+		Tipo dado = tipoRepository.findById(id);
+		dado.setAtivo(false);
+		tipoRepository.save(dado);
+		return "redirect:/tipo/listar";
 	}
 
+	@RequestMapping(value = "/atualizar/{id}" , method = RequestMethod.POST)
+	public String atualizarDado(Tipo dadoNovo) {
+		Tipo dadoVelho = tipoRepository.findById(dadoNovo.getId());
+		dadoVelho = dadoNovo;
+		tipoRepository.save(dadoVelho);												
+		return "redirect:/tipo/listar";
+	}
+	
+	@RequestMapping("/atualizar/{id}")
+	public ModelAndView atualizar(@PathVariable("id") long id) {
+		Tipo dado = tipoRepository.findById(id);
+		ModelAndView modelAndView = new ModelAndView("tipo/atualizaTipo");
+		modelAndView.addObject("tipo", dado);
+		return modelAndView;
+	}
+	
 }

@@ -1,5 +1,8 @@
 package br.com.labssenac.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,17 +35,39 @@ public class MateriaController {
 	@RequestMapping("/listar")
 	public ModelAndView listaMaterias() {
 		ModelAndView modelAndView = new ModelAndView("materia/listaMateria");
-		Iterable<Materia> materias = materiaRepository.findAll();
-		modelAndView.addObject("materias", materias);
+		List<Materia> materias = (List<Materia>) materiaRepository.findAll();
+		List<Materia> materiasAtivos = new ArrayList<Materia>();
+
+		for (Materia materia : materias) {
+			if (materia.isAtivo())
+				materiasAtivos.add(materia);
+		}
+
+		modelAndView.addObject("materias", materiasAtivos);
 		return modelAndView;
 	}
 
-	@RequestMapping("/detalhes/{id}")
-	public ModelAndView detalhesMaterias(@PathVariable("id") long id) {
-		Materia materia = materiaRepository.findById(id);
-		ModelAndView modelAndView = new ModelAndView("materia/detalhesMateria");
-		modelAndView.addObject("materia", materia);
-		return modelAndView;
+	@RequestMapping("/deletar/{id}")
+	public String deletar(@PathVariable("id") long id) {
+		Materia dado = materiaRepository.findById(id);
+		dado.setAtivo(false);
+		materiaRepository.save(dado);
+		return "redirect:/materia/listar";
 	}
 
+	@RequestMapping(value = "/atualizar/{id}" , method = RequestMethod.POST)
+	public String atualizarDado(Materia dadoNovo) {
+		Materia dadoVelho = materiaRepository.findById(dadoNovo.getId());
+		dadoVelho = dadoNovo;
+		materiaRepository.save(dadoVelho);												
+		return "redirect:/materia/listar";
+	}
+	
+	@RequestMapping("/atualizar/{id}")
+	public ModelAndView atualizar(@PathVariable("id") long id) {
+		Materia dado = materiaRepository.findById(id);
+		ModelAndView modelAndView = new ModelAndView("materia/atualizaMateria");
+		modelAndView.addObject("materia", dado);
+		return modelAndView;
+	}
 }

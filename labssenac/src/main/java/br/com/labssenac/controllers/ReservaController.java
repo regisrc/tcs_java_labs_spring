@@ -1,5 +1,8 @@
 package br.com.labssenac.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,17 +35,39 @@ public class ReservaController {
 	@RequestMapping("/listar")
 	public ModelAndView listaReservas() {
 		ModelAndView modelAndView = new ModelAndView("reserva/listaReserva");
-		Iterable<Reserva> reservas = reservaRepository.findAll();
-		modelAndView.addObject("reservas", reservas);
+		List<Reserva> reservas = (List<Reserva>) reservaRepository.findAll();
+		List<Reserva> reservasAtivas = new ArrayList<Reserva>();
+		
+		for (Reserva reserva : reservas) {
+			if(reserva.isAtivo())
+				reservasAtivas.add(reserva);
+		}
+		
+		modelAndView.addObject("reservas", reservasAtivas);
 		return modelAndView;
 	}
 
-	@RequestMapping("/detalhes/{id}")
-	public ModelAndView detalhesReservas(@PathVariable("id") long id) {
-		Reserva reserva = reservaRepository.findById(id);
-		ModelAndView modelAndView = new ModelAndView("reserva/detalhesReserva");
-		modelAndView.addObject("reserva", reserva);
-		return modelAndView;
+	@RequestMapping("/deletar/{id}")
+	public String deletar(@PathVariable("id") long id) {
+		Reserva dado = reservaRepository.findById(id);
+		dado.setAtivo(false);
+		reservaRepository.save(dado);
+		return "redirect:/reserva/listar";
 	}
 
+	@RequestMapping(value = "/atualizar/{id}", method = RequestMethod.POST)
+	public String atualizarDado(Reserva dadoNovo) {
+		Reserva dadoVelho = reservaRepository.findById(dadoNovo.getId());
+		dadoVelho = dadoNovo;
+		reservaRepository.save(dadoVelho);												
+		return "redirect:/reserva/listar";
+	}
+	
+	@RequestMapping("/atualizar/{id}")
+	public ModelAndView atualizar(@PathVariable("id") long id) {
+		Reserva dado = reservaRepository.findById(id);
+		ModelAndView modelAndView = new ModelAndView("reserva/atualizaReserva");
+		modelAndView.addObject("reserva", dado);
+		return modelAndView;
+	}
 }

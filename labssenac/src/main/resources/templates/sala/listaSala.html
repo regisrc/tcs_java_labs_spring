@@ -25,11 +25,15 @@
 				<tr>
 					<th scope="col">Id</th>
 					<th scope="col">Numero</th>
+					<th scope="col">Deletar</th>
+					<th scope="col">Atualizar</th>
 				</tr>
 			</thead>
 			<tbody th:each="sala : ${salas}">
 				<th th:text="${sala.id}"></th>
 				<td th:text="${sala.numero}"></td>
+				<td><a th:href="@{'/sala/deletar/' + ${sala.id}}">Deletar</a></td>
+				<td><a th:href="@{'/sala/atualizar/' + ${sala.id}}">Atualizar</a></td>
 			</tbody>
 		</table>
 
