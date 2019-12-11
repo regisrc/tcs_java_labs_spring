@@ -1,5 +1,8 @@
 package br.com.labssenac.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.labssenac.models.Usuario;
-import br.com.labssenac.repository.ProfessorRepository;
 import br.com.labssenac.repository.UsuarioRepository;
 
 @Controller
@@ -17,9 +19,6 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-
-	@Autowired
-	private ProfessorRepository professorRepository;
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public String form() {
@@ -31,21 +30,44 @@ public class UsuarioController {
 		usuarioRepository.save(usuario);
 		return "redirect:/usuario/cadastrar";
 	}
-
+	
 	@RequestMapping("/listar")
 	public ModelAndView listaUsuarios() {
 		ModelAndView modelAndView = new ModelAndView("usuario/listaUsuario");
-		Iterable<Usuario> usuarios = usuarioRepository.findAll();
-		modelAndView.addObject("usuarios", usuarios);
+		List<Usuario> usuarios = (List<Usuario>) usuarioRepository.findAll();
+		List<Usuario> usuariosAtivas = new ArrayList<Usuario>();
+
+		for (Usuario usuario : usuarios) {
+			if (usuario.isAtivo())
+				usuariosAtivas.add(usuario);
+		}
+
+		modelAndView.addObject("usuarios", usuariosAtivas);
 		return modelAndView;
 	}
 
-	@RequestMapping("/detalhesUsuario/{id}")
-	public ModelAndView detalhesUsuarios(@PathVariable("id") long id) {
+	@RequestMapping("/deletar/{id}")
+	public String deletar(@PathVariable("id") long id) {
 		Usuario usuario = usuarioRepository.findById(id);
-		ModelAndView modelAndView = new ModelAndView("usuario/detalhesUsuario");
+		usuario.setAtivo(false);
+		usuarioRepository.save(usuario);
+		return "redirect:/usuario/listar";
+	}
+	
+	@RequestMapping(value = "/atualizar/{id}" , method = RequestMethod.POST)
+	public String atualizarDado(Usuario usuarioNovo) {
+		Usuario usuario = usuarioRepository.findById(usuarioNovo.getId());
+		usuario = usuarioNovo;
+		usuarioRepository.save(usuario);												
+		return "redirect:/usuario/listar";
+	}
+	
+	@RequestMapping("/atualizar/{id}")
+	public ModelAndView atualizar(@PathVariable("id") long id) {
+		Usuario usuario = usuarioRepository.findById(id);
+		ModelAndView modelAndView = new ModelAndView("usuario/atualizaUsuario");
 		modelAndView.addObject("usuario", usuario);
 		return modelAndView;
 	}
-
-}
+	
+} 

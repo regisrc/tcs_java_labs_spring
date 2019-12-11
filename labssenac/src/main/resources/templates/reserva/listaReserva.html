@@ -14,7 +14,7 @@
 
 	<div class="container text-center mt-5">
 		<div class="md">
-			<h1>Lista de Materias</h1>
+			<h1>Lista de Reserva</h1>
 			<a href="/reserva/cadastrar"><button class="btn btn-primary m-3"
 					type="submit">Cadastrar</button></a> <a href="../"><button
 					class="btn btn-primary m-3" type="submit">Voltar</button></a>
@@ -25,19 +25,23 @@
 				<tr>
 					<th scope="col">Id</th>
 					<th scope="col">Sala</th>
-					<th scope="col">Materia</th>
-					<th scope="col">Professor</th>
 					<th scope="col">Data</th>
 					<th scope="col">Data Limite</th>
+					<th scope="col">Professor</th>
+					<th scope="col">Materia</th>
+					<th scope="col">Deletar</th>
+					<th scope="col">Atualizar</th>
 				</tr>
 			</thead>
 			<tbody th:each="reserva : ${reservas}">
 				<th th:text="${reserva.id}"></th>
-				<td th:text="${reserva.sala}"></td>
-				<th th:text="${reserva.data}"></th>
+				<td th:text="${reserva.sala.id}"></td>
+				<td th:text="${reserva.data}"></td>
 				<td th:text="${reserva.dataLimite}"></td>
-				<th th:text="${reserva.professor}"></th>
-				<td th:text="${reserva.materia}"></td>
+				<td th:text="${reserva.professor.id}"></td>
+				<td th:text="${reserva.materia.id}"></td>
+				<td><a th:href="@{'/reserva/deletar/' + ${reserva.id}}">Deletar</a></td>
+				<td><a th:href="@{'/reserva/atualizar/' + ${reserva.id}}">Atualizar</a></td>
 			</tbody>
 		</table>
 

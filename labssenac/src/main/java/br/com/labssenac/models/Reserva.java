@@ -20,6 +20,7 @@ public class Reserva implements Serializable {
 	private Sala sala;
 	private Date data;
 	private Date dataLimite;
+	private boolean Ativo;
 
 	public long getId() {
 		return id;
@@ -69,4 +70,14 @@ public class Reserva implements Serializable {
 		this.dataLimite = dataLimite;
 	}
 
+	public boolean isAtivo() {
+		return Ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		Ativo = ativo;
+	}
+
+	
+	
 }
